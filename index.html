@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo app</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    
+        <!-- <button onclick="todos.push('new todo')">click me</button> -->
+    <center style="margin-bottom: 20px; margin-top: 100px;"><input id="date-picker" type="date"></center>
+    <center style="margin-bottom: 15px;"><input id="todo-title" type="text"></input></center>
+    <center style="margin-bottom: 20px;"><button onclick="addTodo()">Add Todo</button></center>
+
+    <!-- for the reset code we are going to put the list inside a div -->
+    <center style="margin-bottom: 20px;"><div id="todo-list"></div></center>
+
+</body>
+
+<script>
+
+
+    // Model
+    // If Localstorage has a todo array then use it
+    // Otherwise use the defualt array.
+
+    let todos;
+
+    // Retrieve what is an array
+    const savedTodos = JSON.parse(localStorage.getItem('todos'))
+    // Check if it's an array
+    if (Array.isArray(saveTodos)) {
+        todos = savedTodos;
+    }
+    else {
+        todos = []
+    }
+
+
+    render()
+
+    
+
+    function addTodo() {
+        const textbox = document.getElementById("todo-title")
+        // whatever value typed in the input will be added
+        const datePicker = document.getElementById('date-picker')
+        duedate = datePicker.value;
+        const title = textbox.value;
+        // How to change a number type to a string  use the '' + method
+
+        // const id = new Date().getTime();
+        const id = '' + new Date().getTime();
+
+        todos.push({
+            title: title,
+            duedate: duedate,
+            id: id
+        })
+
+        saveTodos();
+        
+        if (title == '') {
+            todos.pop()
+            alert('Please Input A Todo')
+        }
+        else if (duedate == '') {
+            todos.pop()
+            alert('Please Input a due date')
+        }
+        render();
+    }
+    
+    
+
+    function deleteTodo(event) {
+        const deleteButton = event.target;
+        const idToDelete = deleteButton.id;
+
+        todos = todos.filter(function (todo) {
+            // if the id of this todo matches idToDelete, return false
+            // For everything else, return true
+            if (todo.id === idToDelete) {
+                return false;
+                element.appendChild()
+            }
+            else {
+                return true;
+            }
+        })
+
+        saveTodos()
+
+        render();
+    }
+
+
+
+    // To save data in the webpage  
+    function saveTodos() {
+        localStorage.setItem('todos', JSON.stringify(todos));
+    }
+
+    // optimized code
+
+    function render() {
+        // reset our list
+        document.getElementById("todo-list").innerHTML = '';
+
+        todos.forEach(function (todo) {
+        const element = document.createElement('div')
+        element.innerText = todo.title + ' ' + todo.duedate;
+
+        const deleteButton = document.createElement('button')
+        deleteButton.innerText = 'Delete'
+        element.appendChild(deleteButton)
+        deleteButton.style = "margin-left: 20px; background:blue; padding: 3px; margin: 5px;";
+        deleteButton.onclick = deleteTodo
+        deleteButton.id = todo.id
+        const Todolist = document.getElementById("todo-list")
+        Todolist.appendChild(element)
+
+        
+    });
+    }
+
+
+</script>
+</html>

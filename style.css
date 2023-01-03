@@ -1,0 +1,39 @@
+* {
+    margin: 0;padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    background: rgb(247, 30, 247);
+}
+
+
+#todo-list {
+    background: rgb(204, 192, 255);
+    background: rgb(20, 120, 45);
+    font-size: large;
+    margin: 10px;
+}
+
+#todo-title {
+    border-radius: 5px;
+}
+
+button {
+    background: rgb(0, 60, 128);
+    font-size: large;
+    padding: 11px;
+}
+
+#date-picker {
+    color: black;
+    padding: 5px;
+    font-family: rockwell condensed;
+    font-size: 25px;
+}
+
+input {
+    font-size: large;
+    font-family: rockwell;
+    padding: 11px;
+}
